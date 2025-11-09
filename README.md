@@ -30,7 +30,9 @@ Each **KISSDB** database is a plain JSON object with two keys:
 
 ## 🚀 Basic Usage
 
-A `msg` with the command and the parameters is sent to the KISSDB node. KISSBD will return the full dataset updated as per command if an update is necessary. In case of a query a second node will answer to the query. The format of the answer depends to the command requested. normally it is a JSON, but can be a CSV formatted string or a simple answer (string or number). As an example, to insert a new record into your KISSDB database, send a message to the function node with the following structure:
+A `msg` with the command and the parameters is sent to the KISSDB node. KISSBD will return the full dataset updated as per command if an update is necessary. In case of a query a second node will answer to the query. The format of the answer depends to the command requested: normally it is a JSON, but can be a CSV formatted string or a simple answer (string or number).
+
+As an example, to insert a new record into your KISSDB database, send a message to the function node with the following structure:
 
 ```js
 msg.data = {
@@ -47,7 +49,7 @@ return msg;
 
 ## 🔗 Using KISSDB with `readFile` and `writeFile` Nodes
 
-The **KISSDB** node is designed to work seamlessly with Node-RED’s built-in `readFile` and `writeFile` nodes to manage a lightweight JSON-based database. This setup allows you to persist data across flows and perform CRUD operations directly on a file. You just need to pay attention that the `writeFile` node needs to owerwrite comepletely the file in the filesystem: full rewrite is needed and not append.
+The **KISSDB** node is designed to work seamlessly with Node-RED’s built-in `readFile` and `writeFile` nodes to manage a lightweight JSON-based database. This setup allows you to persist data across flows and perform CRUD operations directly on a file. You just need to pay attention that the `writeFile` node needs to owerwrite completely the file in the filesystem: full rewrite is needed and not append.
 This clearly puts a limit to the dimension of the dababase: it has to reside in memory and ideally, everytime a change is made, the full database is written to disk, tush reducing the performance.
 
 ---
@@ -65,7 +67,7 @@ Normal functioning is through the command nodes that communicate the name of the
 This architecture is simple and modular, this allows the user to decide if and when the database has to be written on a file or kept in memory.
 An example with some support nodes, manages the database in memory and flushes it to the disk ony as a "backup".
 
-Furthermore, passing the filename in the messages everythime, while increasing slightly the programming burden, it allows the flexibilty to manage multiple files in the same flow. This allows to simultate multiple tables (one per file) instead of having one single file that becomes to big, or too big.
+Furthermore, passing the filename in the messages everythime, while increasing slightly the programming burden, it allows the flexibilty to manage multiple files in the same flow. This allows to simulate multiple tables (one per file) instead of having one single file that becomes big, or too big.
 
 The model is simple: all the database is read and kept in memory (under `msg.payload`) and completely written back to the file every time. This is clearly possible with small databases:**KISSBD** is not suited for big data (or growing over time data).
 
