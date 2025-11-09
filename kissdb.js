@@ -1388,5 +1388,12 @@ return [
     });
   }
 
-  RED.nodes.registerType("kissdb", KissDBNode);
-};
+ RED.nodes.registerType("kissdb", KissDBNode, {
+  category: "function",
+  defaults: {
+    name: { value: "" }
+  },
+  inputs: 1,
+  outputs: 2,
+  icon: "file.png"
+});
