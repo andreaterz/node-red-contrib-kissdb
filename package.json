@@ -1,0 +1,14 @@
+{
+  "name": "node-red-contrib-kissdb",
+  "version": "1.0.0",
+  "description": "A simple JSON-based database node for Node-RED",
+  "dependencies": {},
+  "keywords": ["node-red", "database", "json", "kissdb"],
+  "node-red": {
+    "nodes": {
+      "kissdb": "kissdb.js"
+    }
+  },
+  "author": "Andrea T",
+  "license": "MIT"
+}
