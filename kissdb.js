@@ -1371,11 +1371,11 @@ node.status({
 *                         OUTPUT                              *
 **************************************************************/
 
-return [
+// Send output
+node.send([
   write ? { payload: result, DBFile: msg.DBFile } : null,
   write ? { info } : { payload: result, info }
-];
-
+]);
 
 
 
@@ -1398,3 +1398,4 @@ return [
   icon: "file.png"
   });
 };
+
