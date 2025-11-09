@@ -1396,4 +1396,5 @@ return [
   inputs: 1,
   outputs: 2,
   icon: "file.png"
-});
+  });
+};
