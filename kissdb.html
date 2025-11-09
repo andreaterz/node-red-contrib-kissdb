@@ -1,11 +1,27 @@
-<script type="text/html" data-template-name="kissdb">
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Nome</label>
-        <input type="text" id="node-input-name" placeholder="KissDB">
-  </div>
+<script type="text/javascript">
+    RED.nodes.registerType('kissdb', {
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            name: { value: "" }
+        },
+        inputs: 1,
+        outputs: 2,
+        icon: "database.png",
+        label: function () {
+            return this.name || "kissdb";
+        }
+    });
 </script>
 
-<script type="text/html" data-help-name="kissdb">
-    <p>KISSDB Database.</p>
-    <p>Setup the various parameters in the msg you send to the node</p>
+<script type="text/x-red" data-template-name="kissdb">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="kissdb">
+    <p>KISSDB: Lightweight JSON-based database node.</p>
+    <p>Use <code>msg.action</code>, <code>msg.data</code>, and <code>msg.DBFile</code> to interact.</p>
 </script>
