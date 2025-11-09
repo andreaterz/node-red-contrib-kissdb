@@ -1,0 +1,2584 @@
+[
+    {
+        "id": "066b5e15fc711640",
+        "type": "tab",
+        "label": "KISSDB v1.0.6",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3f63f449788e6d88",
+        "type": "debug",
+        "z": "066b5e15fc711640",
+        "name": "payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2280,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "79fb06fc77d06cae",
+        "type": "file in",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "filename": "DBFile",
+        "filenameType": "msg",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1980,
+        "y": 1500,
+        "wires": [
+            [
+                "6b6ef676bea00609"
+            ]
+        ]
+    },
+    {
+        "id": "a8dfb1a9bfaff2ff",
+        "type": "file",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "filename": "DBFile",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 2280,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fb38dd925ec7108a",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "CREATE",
+        "func": "msg = {\n    \"action\": \"CREATE\",\n     \"DBFile\": \"/data/KissDBTest.json\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 540,
+        "wires": [
+            [
+                "6b6ef676bea00609"
+            ]
+        ]
+    },
+    {
+        "id": "c6f81fdeeea411b0",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 540,
+        "wires": [
+            [
+                "fb38dd925ec7108a"
+            ]
+        ]
+    },
+    {
+        "id": "b08c4b48c511c3ae",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 680,
+        "wires": [
+            [
+                "deece213096203d4"
+            ]
+        ]
+    },
+    {
+        "id": "deece213096203d4",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "INSERT",
+        "func": "msg.data = {\n  Title: \"This is the title\",\n  Cathegory: \"This is the cathegory\",\n  Status: \"To Do\",\n  DueDate: \"2025-10-17\",\n  Notes: \"check a, b and c\"\n};\nmsg.DBFile =\"/data/KissDBTest.json\";\nmsg.action = \"INSERT\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 680,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "79ba73e421aae3fa",
+        "type": "debug",
+        "z": "066b5e15fc711640",
+        "name": "Info",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "info",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2270,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "b719aa58d44113fb",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 740,
+        "wires": [
+            [
+                "24164cdd11556951"
+            ]
+        ]
+    },
+    {
+        "id": "24164cdd11556951",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "FIND",
+        "func": "msg.action = \"FIND\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.query = { Status: \"Done\" };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 740,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "01a5a0b2e6ab2fdc",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "UPDATE",
+        "func": "msg.ID = 3;\nmsg.update = {\n  Status: \"Done\"\n};\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.action = \"UPDATE\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 860,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "ca9443fb4a043911",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 860,
+        "wires": [
+            [
+                "01a5a0b2e6ab2fdc"
+            ]
+        ]
+    },
+    {
+        "id": "537b9e53689d95dd",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "FIND 2 CONDITIONS",
+        "func": "msg.action = \"FIND\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.query = { \n                ID: 1,\n                Status: \"Done\"\n            };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 800,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "9602ccf7cf66bc9e",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 800,
+        "wires": [
+            [
+                "537b9e53689d95dd"
+            ]
+        ]
+    },
+    {
+        "id": "f5af9c70f56ee93b",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 920,
+        "wires": [
+            [
+                "0ba389f7c4cbfedf"
+            ]
+        ]
+    },
+    {
+        "id": "0ba389f7c4cbfedf",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "DELETE",
+        "func": "msg.ID = 10;\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.action = \"DELETE\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 920,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "2fbcd6b1ab21b847",
+        "type": "comment",
+        "z": "066b5e15fc711640",
+        "name": "ONCE FILE CREATED, BETTER TO REMOVE",
+        "info": "",
+        "x": 1440,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "9d65d101fdde1780",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "COUNT",
+        "func": "msg.count = { \"field\": \"ID\" };\nmsg.action = \"COUNT\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 980,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "43ae6c8810fb1cb3",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 980,
+        "wires": [
+            [
+                "9d65d101fdde1780"
+            ]
+        ]
+    },
+    {
+        "id": "2ce32dabe475623c",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "ADD",
+        "func": "msg.add = { \"field\": \"Status\", \"value\": \"Done\" };\nmsg.action = \"ADD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 1040,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "f4aacd2a51a1fae4",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1040,
+        "wires": [
+            [
+                "2ce32dabe475623c"
+            ]
+        ]
+    },
+    {
+        "id": "8989a6a6a5d4c82b",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1100,
+        "wires": [
+            [
+                "1778fd5b0204948c"
+            ]
+        ]
+    },
+    {
+        "id": "1778fd5b0204948c",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "UPDATE",
+        "func": "msg.ID = 6;\nmsg.update = {\n  data: \"2025-11-25\"\n};\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.action = \"UPDATE\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 1100,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "f7fac68d67f5ee12",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "FIND",
+        "func": "msg.action = \"FIND\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.query = { ID: 6 };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 1160,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "bf27d5c9204841d9",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1160,
+        "wires": [
+            [
+                "f7fac68d67f5ee12"
+            ]
+        ]
+    },
+    {
+        "id": "ebbe2138876992cc",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "FILTERBYDATERANGE",
+        "func": "msg.action = \"FILTERBYDATERANGE\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.dateRange = {\n                    \"field\": \"DueDate\",\n                    \"from\" : \"2025-11-01\",\n                    \"to\"   : \"2026-01-01\"\n };\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1530,
+        "y": 1320,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "500220413df95a76",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1320,
+        "wires": [
+            [
+                "ebbe2138876992cc"
+            ]
+        ]
+    },
+    {
+        "id": "80e837338c2c11e8",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "RENAME",
+        "func": "msg.action = \"RENAME\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.rename = {\n                    \"from\" : \"ExpectedDate\",\n                    \"to\"   : \"ExpectedDateNew\"\n };\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 1420,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "7916675425a30a8b",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1420,
+        "wires": [
+            [
+                "80e837338c2c11e8"
+            ]
+        ]
+    },
+    {
+        "id": "7344e803022214ee",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "REMOVE",
+        "func": "msg.action = \"REMOVE\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.remove = {\n                    \"field\" : \"ExpectedDateNew\",\n             };\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 1500,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "1668b25953a273a5",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1500,
+        "wires": [
+            [
+                "7344e803022214ee"
+            ]
+        ]
+    },
+    {
+        "id": "9f5c67d95fe69c46",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "VALIDATE",
+        "func": "msg.action = \"VALIDATE\";\nmsg.DBFile = \"/data/KissDBTest.json\";\n\nmsg.validate = {\n    required: [\"Title\", \"Status\"]\n};\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1570,
+        "y": 1580,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "06bc270456ec9272",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1580,
+        "wires": [
+            [
+                "9f5c67d95fe69c46"
+            ]
+        ]
+    },
+    {
+        "id": "c98e069a1bca5f07",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1660,
+        "wires": [
+            [
+                "5d396e628a3a8970"
+            ]
+        ]
+    },
+    {
+        "id": "5d396e628a3a8970",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "ADD",
+        "func": "msg.add = { \"field\": \"Author\", \"value\": \"ADDED BY NODERED\" };\nmsg.action = \"ADD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 1660,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "a660d50cc6295837",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1740,
+        "wires": [
+            [
+                "c59f6448b66eafef"
+            ]
+        ]
+    },
+    {
+        "id": "c59f6448b66eafef",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "FIND",
+        "func": "msg.action = \"FIND\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.query = { ID: 4 };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 1740,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "4f9d055d15b56092",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1800,
+        "wires": [
+            [
+                "035cfa2a5405022a"
+            ]
+        ]
+    },
+    {
+        "id": "035cfa2a5405022a",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "EXPORTJSON",
+        "func": "msg.action = \"EXPORTJSON\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.export = {\n    fields: [\"DueDate\", \"ID\"]\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1560,
+        "y": 1800,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "b7e2d4f293f6ea32",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "EXPORTCSV",
+        "func": "msg.action = \"EXPORTCSV\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.export = {\n    fields: [\"Title\", \"ID\"],\n     separator: \";\"\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1560,
+        "y": 1860,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "9831b21d7ad40fcb",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1860,
+        "wires": [
+            [
+                "b7e2d4f293f6ea32"
+            ]
+        ]
+    },
+    {
+        "id": "6996d144d6f11382",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1920,
+        "wires": [
+            [
+                "4f8fa8274dc2341f"
+            ]
+        ]
+    },
+    {
+        "id": "4f8fa8274dc2341f",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "EXPORTCSVBYDATERANGE",
+        "func": "msg.action = \"EXPORTCSVBYDATERANGE\";\n\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.export = {\n    fields: [\"Title\", \"ID\"],\n    separator: \";\",\n    dateField: \"DueDate\",\n    from: \"2025-11-01\",\n    to: \"2025-12-31\",\n\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1510,
+        "y": 1920,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "6b3a49eb9965a78c",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1980,
+        "wires": [
+            [
+                "3d755df059ebfe62"
+            ]
+        ]
+    },
+    {
+        "id": "3d755df059ebfe62",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "EXPORTJSONBYDATERANGE",
+        "func": "msg.action = \"EXPORTJSONBYDATERANGE\";\n\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.export = {\n    fields: [\"ID\", \"Title\"],\n    separator: \";\",\n    dateField: \"DueDate\",\n    from: \"2025-11-01\",\n    to: \"2025-12-31\",\n\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1510,
+        "y": 1980,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "63b4df4d1da3b7d3",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2040,
+        "wires": [
+            [
+                "1501d13f8444ce2d"
+            ]
+        ]
+    },
+    {
+        "id": "1501d13f8444ce2d",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "COUNTBYGROUP",
+        "func": "msg.group = {\n    field: \"Status\"\n};\n\nmsg.action = \"COUNTBYGROUP\";\n\nmsg.DBFile = \"/data/KissDBTest.json\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1550,
+        "y": 2040,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "59a03098b2ef9067",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2100,
+        "wires": [
+            [
+                "fd27638460f02ada"
+            ]
+        ]
+    },
+    {
+        "id": "fd27638460f02ada",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "SUMBYDATERANGE",
+        "func": "msg.action = \"SUMBYDATERANGE\";\n\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.sum = {\n    dateField: \"DueDate\",\n    from: \"2025-11-01\",\n    to: \"2025-12-31\",\n    valueField: \"ID\"\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 2100,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "d13d7672fea77167",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2220,
+        "wires": [
+            [
+                "5e0cb89c4d8f4c38"
+            ]
+        ]
+    },
+    {
+        "id": "5e0cb89c4d8f4c38",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "COUNTBYDATERANGE",
+        "func": "msg.action = \"COUNTBYDATERANGE\";\n\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.count = {\n    dateField: \"DueDate\",\n    from: \"2025-11-01\",\n    to: \"2025-12-31\"\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1530,
+        "y": 2220,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "4fa5fbf9925382db",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2520,
+        "wires": [
+            [
+                "4136b4fdeee46099"
+            ]
+        ]
+    },
+    {
+        "id": "4136b4fdeee46099",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "CHARTDATABYDATERANGE",
+        "func": "// Action to execute: generate an aggregated time series\nmsg.action = \"TIMESERIESBYDATERANGE\";\n\n// Path to the JSON database file\nmsg.DBFile = \"/data/KissDBTest.json\";\n\n// Parameters for time series generation\nmsg.timeseries = {\n    dateField: \"DueDate\",     // Date field used for filtering and grouping\n    valueField: \"ID\",         // Numeric field to aggregate (e.g. humidity, quantity, etc.)\n    from: \"2025-10-01\",       // Start date of the range (inclusive)\n    to: \"2025-12-31\",         // End date of the range (inclusive)\n    groupBy: \"week\",          // Grouping type: \"day\", \"week\", \"month\", \"year\"\n    method: \"max\"             // Aggregation method: \"avg\", \"max\", \"min\", \"sum\", \"count\"\n};\n\n// Return the message for processing\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1510,
+        "y": 2520,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "47bf8d5e89a6bac4",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2580,
+        "wires": [
+            [
+                "0fc10926b1a3e416"
+            ]
+        ]
+    },
+    {
+        "id": "0fc10926b1a3e416",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "SORT",
+        "func": "msg.action = \"SORT\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.sort = {\n    field: \"DueDate\",     // field to sort by\n    order: \"asc\"           // \"asc\" for ascending, \"desc\" for descending\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 2580,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "686e11ee3c439817",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2160,
+        "wires": [
+            [
+                "942b4cdecc148041"
+            ]
+        ]
+    },
+    {
+        "id": "942b4cdecc148041",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "AVGBYDATERANGE",
+        "func": "msg.action = \"AVGBYDATERANGE\";\n\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.avg = {\n    dateField: \"DueDate\",\n    from: \"2025-11-01\",\n    to: \"2025-12-31\",\n    valueField: \"ID\"\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 2160,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "8fd815b355ee0806",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2280,
+        "wires": [
+            [
+                "caeea842e8826445"
+            ]
+        ]
+    },
+    {
+        "id": "caeea842e8826445",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "MAXBYDATERANGE",
+        "func": "msg.action = \"MAXBYDATERANGE\";\n\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.max = {\n    dateField: \"DueDate\",\n    from: \"2025-11-01\",\n    to: \"2025-12-31\",\n    valueField: \"ID\"\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 2280,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "149639cadedd4242",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2340,
+        "wires": [
+            [
+                "8cd13e906b7926b3"
+            ]
+        ]
+    },
+    {
+        "id": "8cd13e906b7926b3",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "MINBYDATERANGE",
+        "func": "msg.action = \"MINBYDATERANGE\";\n\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.min = {\n    dateField: \"DueDate\",\n    from: \"2025-11-01\",\n    to: \"2025-12-31\",\n    valueField: \"ID\"\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 2340,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "bc5a56cc6fef2360",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2400,
+        "wires": [
+            [
+                "598b0573158f09b4"
+            ]
+        ]
+    },
+    {
+        "id": "598b0573158f09b4",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "TIMESERIESBYDATERANGE",
+        "func": "msg.action = \"TIMESERIESBYDATERANGE\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.timeseries = {\n    dateField: \"DueDate\",\n    valueField: \"ID\",\n    from: \"2025-10-01\",\n    to: \"2025-12-31\",\n    groupBy: \"month\", // \"day\", \"week\", \"month\", \"year\"\n    method: \"avg\"   // \"avg\", \"max\", \"min\", \"sum\", \n};\nreturn msg;\n\n\n\n\n\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1510,
+        "y": 2400,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "a0adda1e34d2d082",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "TIMESERIESCSVBYDATERANGE",
+        "func": "msg.action = \"TIMESERIESCSVBYDATERANGE\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.timeseries = {\n    dateField: \"DueDate\",\n    valueField: \"ID\",\n    from: \"2025-10-01\",\n    to: \"2025-12-31\",\n    groupBy: \"week\",\n    method: \"max\"\n};\nreturn msg;\n\n\n\n\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 2460,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "876ab0cfc25a5ad1",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2460,
+        "wires": [
+            [
+                "a0adda1e34d2d082"
+            ]
+        ]
+    },
+    {
+        "id": "c52e18bf76a7f0a1",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "GETUNIQUEVALUES",
+        "func": "msg.action = \"GETUNIQUEVALUES\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.field = \"Status\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 2640,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "a52bf27564c5e09c",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2640,
+        "wires": [
+            [
+                "c52e18bf76a7f0a1"
+            ]
+        ]
+    },
+    {
+        "id": "bc3638bce3aeb0e0",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "MERGEFIELDS",
+        "func": "msg.action = \"MERGEFIELDS\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.merge = {\n    fields: [\"Title\", \"Cathegory\"],\n    newField: \"CompleteTile\",\n    separator: \" - \"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1560,
+        "y": 2700,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "f52ae13ce3882976",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2700,
+        "wires": [
+            [
+                "bc3638bce3aeb0e0"
+            ]
+        ]
+    },
+    {
+        "id": "479194234bb26e75",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "SPLITFIELD",
+        "func": "msg.action = \"SPLITFIELD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.split = {\n  field: \"DueDate\",\n  format: \"YYYY-MM-DD\",\n  into: [\"Year\", \"Month\", \"Day\"]\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1570,
+        "y": 2760,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "04cd23ba3fa70005",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2760,
+        "wires": [
+            [
+                "479194234bb26e75"
+            ]
+        ]
+    },
+    {
+        "id": "e9da22610dd64b5a",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "REMOVE",
+        "func": "msg.action = \"REMOVE\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.remove = {\n                    \"field\" : \"CompleteTile\",\n             };\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 2820,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "0f86f466b03e3085",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2820,
+        "wires": [
+            [
+                "e9da22610dd64b5a"
+            ]
+        ]
+    },
+    {
+        "id": "538c6fb05f99a9ec",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2880,
+        "wires": [
+            [
+                "f599b1c1302874b6"
+            ]
+        ]
+    },
+    {
+        "id": "f599b1c1302874b6",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "ADD",
+        "func": "msg.add = { \"field\": \"Umidity\", \"value\": \"7.35\" };\nmsg.action = \"ADD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 2880,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "a67703061285096c",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 2940,
+        "wires": [
+            [
+                "e23a439cc045cfa2"
+            ]
+        ]
+    },
+    {
+        "id": "e23a439cc045cfa2",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "BEAUTIFYFIELD - ROUND",
+        "func": "msg.action = \"BEAUTIFYFIELD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.beautify = {\n    field: \"Umidity\",\n    operation: \"round\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1520,
+        "y": 2940,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "d448592660714550",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 3000,
+        "wires": [
+            [
+                "72a2cced7dfc8c80"
+            ]
+        ]
+    },
+    {
+        "id": "72a2cced7dfc8c80",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "BEAUTIFYFIELD - MULTIPLY",
+        "func": "msg.action = \"BEAUTIFYFIELD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.beautify = {\n    field: \"Umidity\",\n    operation: \"multiply\",\n    options: { factor: 1.2 }\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1510,
+        "y": 3000,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "b3f0ef462de6b947",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 3060,
+        "wires": [
+            [
+                "9e0c215ac2f4b67f"
+            ]
+        ]
+    },
+    {
+        "id": "9e0c215ac2f4b67f",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "BEAUTIFYFIELD - ABS",
+        "func": "msg.action = \"BEAUTIFYFIELD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.beautify = {\n  field: \"Umidity\",\n  operation: \"abs\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1530,
+        "y": 3060,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "a952aaef93af6876",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 3120,
+        "wires": [
+            [
+                "2963c34c7e5e2811"
+            ]
+        ]
+    },
+    {
+        "id": "2963c34c7e5e2811",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "BEAUTIFYFIELD - LOWERCASE",
+        "func": "msg.action = \"BEAUTIFYFIELD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.beautify = {\n  field: \"Status\",\n  operation: \"lowercase\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 3120,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "5548261d76b8d458",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 3180,
+        "wires": [
+            [
+                "ec911c07dba313eb"
+            ]
+        ]
+    },
+    {
+        "id": "ec911c07dba313eb",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "BEAUTIFYFIELD - UPPERCASE",
+        "func": "msg.action = \"BEAUTIFYFIELD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.beautify = {\n  field: \"Status\",\n  operation: \"uppercase\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 3180,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "777d161590ad3588",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 3240,
+        "wires": [
+            [
+                "d733bcefa63acd08"
+            ]
+        ]
+    },
+    {
+        "id": "d733bcefa63acd08",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "BEAUTIFYFIELD - TRIM",
+        "func": "msg.action = \"BEAUTIFYFIELD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.beautify = {\n  field: \"Notes\",\n  operation: \"trim\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1530,
+        "y": 3240,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "a72d5d9d495a5fde",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 3300,
+        "wires": [
+            [
+                "729e6c0782ca0fb6"
+            ]
+        ]
+    },
+    {
+        "id": "729e6c0782ca0fb6",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "BEAUTIFYFIELD - REPLACE",
+        "func": "msg.action = \"BEAUTIFYFIELD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.beautify = {\n  field: \"Status\",\n  operation: \"replace\",\n  options: { from: \"TO DO\", to: \"To DOOO\" }\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1510,
+        "y": 3300,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "7decf7b507fab0d0",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 3360,
+        "wires": [
+            [
+                "4656525efe88b4d5"
+            ]
+        ]
+    },
+    {
+        "id": "4656525efe88b4d5",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "BEAUTIFYFIELD - DATEFORMAT1",
+        "func": "msg.action = \"BEAUTIFYFIELD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.beautify = {\n  field: \"DueDate\",\n  operation: \"dateformat\",\n  options: { format: \"DD/MM/YYYY\" }\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 3360,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "92dc33dc11cdd1f9",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 3420,
+        "wires": [
+            [
+                "bd563297f714e83e"
+            ]
+        ]
+    },
+    {
+        "id": "bd563297f714e83e",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "BEAUTIFYFIELD - DATEFORMAT2",
+        "func": "msg.action = \"BEAUTIFYFIELD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.beautify = {\n  field: \"DueDate\",\n  operation: \"dateformat\",\n  options: { format: \"YYYY-MM-DD\" }\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 3420,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "a6f44bccb678f537",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 3480,
+        "wires": [
+            [
+                "9335b652b5133d0e"
+            ]
+        ]
+    },
+    {
+        "id": "9335b652b5133d0e",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "BEAUTIFYFIELD - CAPITALIZE",
+        "func": "msg.action = \"BEAUTIFYFIELD\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.beautify = {\n  field: \"Status\",\n  operation: \"capitalize\"\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1510,
+        "y": 3480,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "0fc048c17095bfaa",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 3540,
+        "wires": [
+            [
+                "ede7f09e1784f5ff"
+            ]
+        ]
+    },
+    {
+        "id": "ede7f09e1784f5ff",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "REORDERFILEDS",
+        "func": "msg.action = \"REORDERFIELDS\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.order = [\"ID\", \"Title\", \"Status\", \"DueDate\", \"Umidity\"];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1550,
+        "y": 3540,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "e43babb89005584b",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 3600,
+        "wires": [
+            [
+                "b8482df6aa960353"
+            ]
+        ]
+    },
+    {
+        "id": "b8482df6aa960353",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "KEEPONLYFILEDS",
+        "func": "msg.action = \"KEEPONLYFIELDS\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.fields = [\"ID\", \"Titles\",\"Cathegory\", \"Notes\" ,\"DueDate\", \"Umidity\"];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1550,
+        "y": 3600,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "b3abdbce039d1530",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 3660,
+        "wires": [
+            [
+                "5a32dfac4201a9a4"
+            ]
+        ]
+    },
+    {
+        "id": "5a32dfac4201a9a4",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "CONVERTTODATE",
+        "func": "msg.action = \"CONVERTTODATE\";\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.field = \"DueDate\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 3660,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "59ab502acfef42d1",
+        "type": "debug",
+        "z": "066b5e15fc711640",
+        "name": "Message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2280,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "127eae7d1034e659",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 640,
+        "wires": [
+            [
+                "5f8a627739e79087"
+            ]
+        ]
+    },
+    {
+        "id": "5f8a627739e79087",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "INSERT",
+        "func": "msg.data = {\n  Title: \"This is the title 2\",\n  Cathegory: \"This is the cathegory\",\n  Status: \"Done\",\n  DueDate: \"2025-10-11\",\n  Notes: \"check a, b and c\"\n};\nmsg.DBFile =\"/data/KissDBTest.json\";\nmsg.action = \"INSERT\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 640,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "f9a932d77a3dafa1",
+        "type": "inject",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1280,
+        "y": 1220,
+        "wires": [
+            [
+                "75ed9f6a2fd61e3a"
+            ]
+        ]
+    },
+    {
+        "id": "75ed9f6a2fd61e3a",
+        "type": "function",
+        "z": "066b5e15fc711640",
+        "name": "UPDATE",
+        "func": "msg.ID = 6;\nmsg.update = {\n  DueDate: \"2025-11-25\"\n};\nmsg.DBFile = \"/data/KissDBTest.json\";\nmsg.action = \"UPDATE\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1580,
+        "y": 1220,
+        "wires": [
+            [
+                "79fb06fc77d06cae"
+            ]
+        ]
+    },
+    {
+        "id": "6b6ef676bea00609",
+        "type": "kissdb",
+        "z": "066b5e15fc711640",
+        "name": "",
+        "x": 2090,
+        "y": 980,
+        "wires": [
+            [
+                "59ab502acfef42d1",
+                "a8dfb1a9bfaff2ff"
+            ],
+            [
+                "3f63f449788e6d88",
+                "79ba73e421aae3fa"
+            ]
+        ]
+    },
+    {
+        "id": "48d8cda9e00b924a",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-kissdb": "1.0.3"
+        }
+    }
+]

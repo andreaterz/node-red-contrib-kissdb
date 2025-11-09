@@ -1,0 +1,460 @@
+[
+    {
+        "id": "ae5d60dd21191368",
+        "type": "tab",
+        "label": "KISSDB in Memory",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "17a79214f7fe3861",
+        "type": "inject",
+        "z": "ae5d60dd21191368",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 280,
+        "wires": [
+            [
+                "195b80bfcf66b10c"
+            ]
+        ]
+    },
+    {
+        "id": "bce957f29a2e3d84",
+        "type": "comment",
+        "z": "ae5d60dd21191368",
+        "name": "ONCE FILE CREATED, BETTER TO REMOVE",
+        "info": "",
+        "x": 320,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "195b80bfcf66b10c",
+        "type": "function",
+        "z": "ae5d60dd21191368",
+        "name": "CREATE",
+        "func": "msg = {\n    \"action\": \"CREATE\",\n     \"DBFile\": \"/data/KissDBMemory.json\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 280,
+        "wires": [
+            [
+                "b6dc3a8963ab4591",
+                "00e293ac8d30fec8"
+            ]
+        ]
+    },
+    {
+        "id": "4a67563b8f65923e",
+        "type": "change",
+        "z": "ae5d60dd21191368",
+        "name": "SAVE DB to LOCAL VARIABLE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "KISSDB",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "KISSDB_clean",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1170,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b6dc3a8963ab4591",
+        "type": "change",
+        "z": "ae5d60dd21191368",
+        "name": "SET DB FILE NAME",
+        "rules": [
+            {
+                "t": "set",
+                "p": "KISSDBFile",
+                "pt": "flow",
+                "to": "DBFile",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ad7351376746c752",
+        "type": "inject",
+        "z": "ae5d60dd21191368",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 680,
+        "wires": [
+            [
+                "0b4321550b3ddce5"
+            ]
+        ]
+    },
+    {
+        "id": "22e9b2dc9dbb262c",
+        "type": "file",
+        "z": "ae5d60dd21191368",
+        "name": "",
+        "filename": "DBFile",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 680,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0b4321550b3ddce5",
+        "type": "function",
+        "z": "ae5d60dd21191368",
+        "name": "CHECK if FILE needs Update",
+        "func": "\nlet KISSDB_clean = flow.get('KISSDB_clean');\n\nif (!KISSDB_clean) {\n\n    msg.payload = flow.get('KISSDB'); \n    msg.DBFile = flow.get('KISSDBFile'); \n    flow.set('KISSDB_clean',true);\n    return msg;\n}\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 680,
+        "wires": [
+            [
+                "22e9b2dc9dbb262c"
+            ]
+        ]
+    },
+    {
+        "id": "cebb2f7fd8312418",
+        "type": "debug",
+        "z": "ae5d60dd21191368",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "6e136ee6a60d07ae",
+        "type": "inject",
+        "z": "ae5d60dd21191368",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 440,
+        "wires": [
+            [
+                "03769e4e7d2e4eb6"
+            ]
+        ]
+    },
+    {
+        "id": "03769e4e7d2e4eb6",
+        "type": "function",
+        "z": "ae5d60dd21191368",
+        "name": "INSERT",
+        "func": "msg.data = {\n  title: \"This is the title\",\n  cathegory: \"Cathegory\",\n  status: \"To Do\",\n  duedate: \"2025-10-17\",\n  notes: \"verify a b and c\"\n};\nmsg.DBFile =\"/data/KissDBMemory.json\";\nmsg.action = \"INSERT\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 440,
+        "wires": [
+            [
+                "1ee673923cf6b997",
+                "5ccbc315ae287fed"
+            ]
+        ]
+    },
+    {
+        "id": "694c28df0e776e69",
+        "type": "file in",
+        "z": "ae5d60dd21191368",
+        "name": "",
+        "filename": "DBFile",
+        "filenameType": "msg",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 620,
+        "y": 140,
+        "wires": [
+            [
+                "9e49f08df392e0d2"
+            ]
+        ]
+    },
+    {
+        "id": "86b1a7447624b25e",
+        "type": "function",
+        "z": "ae5d60dd21191368",
+        "name": "SetupKISSDB",
+        "func": "msg = {\n    \n     \"DBFile\": \"/data/KissDBMemory.json\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 140,
+        "wires": [
+            [
+                "694c28df0e776e69"
+            ]
+        ]
+    },
+    {
+        "id": "9e49f08df392e0d2",
+        "type": "change",
+        "z": "ae5d60dd21191368",
+        "name": "SET DB IN LOCAL VARIABLE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "KISSDB",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "KISSDB_clean",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ae0d4602bb599fee",
+        "type": "inject",
+        "z": "ae5d60dd21191368",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 140,
+        "wires": [
+            [
+                "86b1a7447624b25e"
+            ]
+        ]
+    },
+    {
+        "id": "1ee673923cf6b997",
+        "type": "debug",
+        "z": "ae5d60dd21191368",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "5ccbc315ae287fed",
+        "type": "change",
+        "z": "ae5d60dd21191368",
+        "name": "ADD DB FROM LOCAL VARIABLE",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "KISSDB",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 440,
+        "wires": [
+            [
+                "00e293ac8d30fec8"
+            ]
+        ]
+    },
+    {
+        "id": "01b1c845e19faa02",
+        "type": "comment",
+        "z": "ae5d60dd21191368",
+        "name": "KEEP FILE ON DISK UPDATED EVERY xx MINUTES",
+        "info": "",
+        "x": 320,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "6956ad80c24984f0",
+        "type": "comment",
+        "z": "ae5d60dd21191368",
+        "name": "READ DATABASE AT STURTUP FROM FILE AND SETUP VARIABLES",
+        "info": "",
+        "x": 390,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "763eb37cd6eb459e",
+        "type": "comment",
+        "z": "ae5d60dd21191368",
+        "name": "REPLACE \"INSERT\" WITH ANY OTHER COMMAND",
+        "info": "",
+        "x": 340,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "00e293ac8d30fec8",
+        "type": "kissdb",
+        "z": "ae5d60dd21191368",
+        "name": "",
+        "x": 910,
+        "y": 440,
+        "wires": [
+            [
+                "4a67563b8f65923e"
+            ],
+            [
+                "cebb2f7fd8312418"
+            ]
+        ]
+    },
+    {
+        "id": "bce2a27ae4918f83",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-kissdb": "1.0.3"
+        }
+    }
+]
