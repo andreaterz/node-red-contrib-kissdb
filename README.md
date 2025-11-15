@@ -7,6 +7,14 @@ A lightweight JSON-based database node for Node-RED
 **KISSDB** is a lightweight, file-backed JSON database designed for Node-RED and JavaScript environments.  
 It offers elegant in-memory CRUD operations, field manipulation, time series aggregation, and export utilities — all through a single `function` node driven by `msg.action`.
 
+## Installation
+Run the following command in your Node-RED user directory:
+
+```bash
+npm install node-red-contrib-kissdb
+```
+
+
 ---
 
 ## 📦 Database Structure
