@@ -72,7 +72,7 @@ This clearly puts a limit to the dimension of the dababase: it has to reside in 
 [Command Node] → [readFile] → [KISSDB] → [writeFile]
 ```
 
-Normal functioning is through the command nodes that communicate the name of the .json file containing the database in the `msg.DBFile` field. The read node read the dabatase and places it in the `msg.payload` field completeing the dataset that the node **KISSDB** receives.
+Normal functioning is through the command nodes that communicate the name of the .json file containing the database in the `msg.DBFile` field. The read node reads the dabatase and places it in the `msg.payload` field completeing the dataset that the node **KISSDB** receives.
 **KISSDB** exports two outputs. On Output 1, the new complete database to be saved/written and on Output the status message to inform about the activities performed and the results.
 **KISSDB** exports once again the name of the file in the field `msg.DBFile`: the write node have to overwrite at this point completely the file on the disk.
 
