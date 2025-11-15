@@ -1,4 +1,7 @@
 [![Node-RED](https://img.shields.io/badge/Node--RED-Module-red.svg)](https://nodered.org)
+![npm version](https://img.shields.io/npm/v/node-red-contrib-kissdb)
+![license](https://img.shields.io/npm/l/node-red-contrib-kissdb)
+
 # node-red-contrib-kissdb
 A lightweight JSON-based database node for Node-RED
 
